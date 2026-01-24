@@ -1,0 +1,91 @@
+@use "./variable.scss" as v;
+
+@mixin button(
+  $bg-color: v.$btn-primary,
+  $text-color: v.$text,
+  $width: 100%,
+  $height: 48px,
+  $radius: 6px,
+  $font-size: 16px,
+  $font-weight: 600,
+  $shadow-color: v.$btn-shadow
+) {
+  width: $width;
+  height: $height;
+  padding: 0 20px;
+  font-size: $font-size;
+  font-weight: $font-weight;
+  color: $text-color;
+  border: none;
+  border-radius: $radius;
+  cursor: pointer;
+  transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+
+  // Gradient background
+  background: linear-gradient(
+    135deg,
+    $bg-color 0%,
+    darken($bg-color, 10%) 100%
+  );
+
+  // Base shadow
+  box-shadow: 0 4px 15px $shadow-color;
+
+  // Pseudo-element for shine effect
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.3),
+      transparent
+    );
+    transition: left 500ms ease;
+  }
+
+  // Hover state
+  &:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px darken($shadow-color, 20%);
+    background: linear-gradient(
+      135deg,
+      lighten($bg-color, 5%) 0%,
+      $bg-color 100%
+    );
+
+    &::before {
+      left: 100%;
+    }
+  }
+
+  // Active state
+  &:active:not(:disabled) {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px $shadow-color;
+  }
+
+  // Focus state
+  &:focus-visible {
+    outline: 2px solid v.$neon-primary;
+    outline-offset: 2px;
+  }
+
+  // Disabled state
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+  }
+}
+
+@mixin error($fz: 12px) {
+  font-size: $fz;
+  color: v.$error;
+}

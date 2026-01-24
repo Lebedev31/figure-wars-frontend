@@ -14,6 +14,10 @@ declare namespace JSX {
     button: Partial<HTMLButtonElement>;
     textarea: Partial<HTMLTextAreaElement>;
     a: Partial<HTMLAnchorElement>;
+    h2: Partial<HTMLHeadingElement>;
+    img: Partial<HTMLImageElement>;
+    select: Partial<HTMLSelectElement>;
+    option: Partial<HTMLOptionElement>;
     // Можно добавить и другие, которые вам нужны
   }
 }

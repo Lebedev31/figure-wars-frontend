@@ -1,6 +1,11 @@
 import styles from "./Main.module.scss";
 import { h } from "../../dom";
-
+import { render } from "./Main.logic";
 export default function Main() {
-  return <main className={styles.main}></main>;
+  const main = (
+    <main className={styles.main} id="id-main"></main>
+  ) as HTMLElement;
+
+  render("auth", main);
+  return main;
 }
