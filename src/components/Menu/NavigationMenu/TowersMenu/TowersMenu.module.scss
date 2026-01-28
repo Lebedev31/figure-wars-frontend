@@ -1,0 +1,21 @@
+@use "../../../../styles/variable.scss" as v;
+
+.tower_menu {
+  width: 100%;
+  min-height: 100vh;
+  background-image: url("/bg/towersMenu.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+.panel {
+  margin: 0 auto;
+  min-height: 100vh;
+  background-color: rgba(v.$bg-dark, 0.8);
+  backdrop-filter: blur(4px);
+  padding-top: 50px;
+  padding-left: 50px;
+  padding-right: 50px;
+}

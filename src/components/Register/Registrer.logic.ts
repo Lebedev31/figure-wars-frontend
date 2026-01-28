@@ -1,8 +1,17 @@
 // Импортируем схемы валидации для регистрации и авторизации из типов
 import { RegisterShema, AuthShema } from "../../type/register";
+import z from "zod";
 // Импортируем типы данных для форм регистрации и авторизации
-import type { RegisterFormType, AuthFormType } from "../../type/register";
-
+import type {
+  RegisterFormType,
+  AuthFormType,
+  UserResponse,
+} from "../../type/register";
+import type { MessageClient } from "../../type/general.type";
+import { handleRequest } from "../../utils/generalFutncion";
+import type { CustomOptions } from "../../utils/generalFutncion";
+import { notification } from "../Notification/Notification.logic";
+import { navigate } from "../../main";
 // Тип для ключей полей формы регистрации (login, email, password, confirmPassword)
 type InputNameRegistration = keyof RegisterFormType;
 // Тип для ключей полей формы авторизации (email, password)
@@ -26,8 +35,8 @@ export const authState: AuthFormType = {
 
 export function guardData<T>(
   data: T,
+  schema: z.ZodTypeAny,
   refsError: Record<string, HTMLElement>,
-  schema: typeof RegisterShema | typeof AuthShema,
 ): boolean {
   // Выполняем безопасную валидацию данных через Zod схему
   const validation = schema.safeParse(data);
@@ -75,20 +84,81 @@ export function handleNameInputAuth(
   state: AuthFormType,
   name: InputNameAuth,
 ) {
-  // Приводим target к типу HTMLInputElement
   const target = e.target as HTMLInputElement;
-  // Обновляем значение в состоянии на введённое значение
   state[name] = target.value;
 }
 
-export function handleSubmit<T>(
+export function handleSubmitRegister(
   e: Event,
-  state: T,
-  refsError: Record<string, HTMLElement>,
-  schema: typeof RegisterShema | typeof AuthShema,
+  data: RegisterFormType,
+  errorRef: Record<string, HTMLElement>,
 ) {
-  // Отменяем стандартную отправку формы (перезагрузку страницы)
-  e.preventDefault();
-  // Выполняем валидацию данных формы
-  guardData(state, refsError, schema);
+  const returnOptions = (data: RegisterFormType): CustomOptions => {
+    return {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      timeout: 5000,
+    };
+  };
+
+  const onSuccses = (data: MessageClient<UserResponse>) => {
+    notification({
+      text: "Регистрация прошла успешно, перейдите на страницу авторизации",
+      type: "Succsses",
+    });
+  };
+
+  const url = (import.meta.env.VITE_BACKEND as string) + "user/register";
+  handleRequest<RegisterFormType, UserResponse, Record<string, HTMLElement>>(
+    e,
+    data,
+    RegisterShema,
+    url,
+    onSuccses,
+    guardData,
+    errorRef,
+    returnOptions(data),
+  );
+}
+
+export function handleSubmitAuth(
+  e: Event,
+  data: AuthFormType,
+  errorRef: Record<string, HTMLElement>,
+) {
+  const returnOptions = (data: AuthFormType): CustomOptions => {
+    return {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      timeout: 5000,
+    };
+  };
+
+  const onSuccses = (data: MessageClient<UserResponse>) => {
+    if (data.data) {
+      const userString = JSON.stringify(data.data);
+      localStorage.setItem("user", userString);
+      navigate("/menu");
+    }
+  };
+
+  const url = (import.meta.env.VITE_BACKEND as string) + "user/auth";
+  handleRequest<AuthFormType, UserResponse, Record<string, HTMLElement>>(
+    e,
+    data,
+    AuthShema,
+    url,
+    onSuccses,
+    guardData,
+    errorRef,
+    returnOptions(data),
+  );
 }

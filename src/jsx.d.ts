@@ -18,6 +18,21 @@ declare namespace JSX {
     img: Partial<HTMLImageElement>;
     select: Partial<HTMLSelectElement>;
     option: Partial<HTMLOptionElement>;
-    // Можно добавить и другие, которые вам нужны
+    header: Partial<HTMLHeadElement>;
+    // Переопределяем svg
+    svg: Partial<Omit<SVGSVGElement, "viewBox">> & {
+      viewBox?: string;
+      width?: string | number;
+      height?: string | number;
+      fill?: string;
+    };
+
+    // Для path тоже лучше явно указать d
+    path: Partial<Omit<SVGPathElement, "d">> & {
+      d?: string;
+      fill?: string;
+      stroke?: string;
+    };
+    circle: Partial<SVGCircleElement>;
   }
 }

@@ -26,3 +26,9 @@ export const RegisterShema = AuthShema.extend({
   path: ["confirmPassword"],
 });
 export type RegisterFormType = z.infer<typeof RegisterShema>;
+
+export type UserResponse = {
+  avatarUrl: string;
+  email: string;
+  login: string;
+};

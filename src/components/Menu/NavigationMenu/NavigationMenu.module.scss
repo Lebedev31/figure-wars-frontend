@@ -1,0 +1,109 @@
+@use "../../../styles/variable.scss" as v;
+
+.navigationWrapper {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding: 10px;
+}
+
+.navigationContainer {
+  position: relative;
+  background: v.$bg-dark;
+  // Форма шестиугольника
+  clip-path: polygon(
+    20px 0,
+    calc(100% - 20px) 0,
+    100% 50%,
+    calc(100% - 20px) 100%,
+    20px 100%,
+    0 50%
+  );
+  padding: 15px 40px;
+  backdrop-filter: blur(5px);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(0, 240, 255, 0.1);
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 20%;
+    right: 20%;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      v.$neon-primary,
+      transparent
+    );
+    box-shadow: 0 0 15px 2px v.$neon-primary;
+    z-index: 1;
+  }
+}
+
+.menuList {
+  display: flex;
+  // Одинаковое расстояние между элементами
+  justify-content: space-between;
+  gap: 40px;
+  align-items: center;
+}
+
+.menuItem {
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+
+    .iconCircle {
+      box-shadow:
+        0 0 20px v.$neon-primary,
+        inset 0 0 10px rgba(v.$neon-primary, 0.4);
+      border-color: #fff;
+    }
+
+    .label {
+      color: #fff;
+      text-shadow: 0 0 8px v.$neon-primary;
+    }
+  }
+}
+
+.menuLink {
+  display: flex;
+  flex-direction: column;
+  align-items: center; // Центрирует иконку и текст по горизонтали
+  text-decoration: none;
+  gap: 10px; // Расстояние между иконкой и текстом
+}
+
+.iconCircle {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  border: 2px solid v.$neon-primary;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.4);
+  box-shadow: 0 0 10px rgba(v.$neon-primary, 0.2);
+  transition: all 0.3s ease;
+
+  svg {
+    width: 26px;
+    height: 26px;
+    fill: v.$neon-primary;
+    filter: drop-shadow(0 0 2px v.$neon-primary);
+  }
+}
+
+.label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: v.$neon-primary;
+  letter-spacing: 1.5px;
+  text-align: center; // Центрирует текст внутри строки
+  transition: color 0.3s ease;
+}

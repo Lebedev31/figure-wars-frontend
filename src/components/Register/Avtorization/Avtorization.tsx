@@ -3,10 +3,9 @@ import { h } from "../../../dom";
 import {
   authState,
   handleNameInputAuth as handleNameInput,
-  handleSubmit,
 } from "../../Register/Registrer.logic";
-import { AuthShema } from "../../../type/register";
 import { toggleRegistration } from "../../Main/Main.logic";
+import { handleSubmitAuth } from "../../Register/Registrer.logic";
 
 export default function Avtorization() {
   const refsError = {
@@ -17,7 +16,7 @@ export default function Avtorization() {
   return (
     <form
       className={styles.form}
-      onsubmit={(e: Event) => handleSubmit(e, authState, refsError, AuthShema)}
+      onsubmit={(e: Event) => handleSubmitAuth(e, authState, refsError)}
     >
       <h2>Регистрация</h2>
       <div className={styles.inputGroup}>

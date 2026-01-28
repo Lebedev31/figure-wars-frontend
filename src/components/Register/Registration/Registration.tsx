@@ -3,9 +3,8 @@ import { h } from "../../../dom";
 import {
   registerState,
   handleNameInputRegistration as handleNameInput,
-  handleSubmit,
+  handleSubmitRegister,
 } from "../Registrer.logic";
-import { RegisterShema } from "../../../type/register";
 import { toggleRegistration } from "../../Main/Main.logic";
 
 export default function Registration() {
@@ -18,9 +17,7 @@ export default function Registration() {
   return (
     <form
       className={styles.form}
-      onsubmit={(e: Event) =>
-        handleSubmit(e, registerState, refsError, RegisterShema)
-      }
+      onsubmit={(e: Event) => handleSubmitRegister(e, registerState, refsError)}
     >
       <h2>Регистрация</h2>
       <div className={styles.inputGroup}>
