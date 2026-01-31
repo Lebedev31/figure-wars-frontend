@@ -14,7 +14,7 @@ export default function Tabs<Name extends string, Patch extends string>(
     <div className={styles.tabs} onclick={(e) => onClickTabs(e)}>
       {tabsProps.map((item) => {
         return (
-          <div>
+          <div onclick={() => getTowerName(item.name)}>
             <img src={item.src} alt="картинка" />
           </div>
         );

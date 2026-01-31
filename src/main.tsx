@@ -3,7 +3,7 @@ import { h } from "./dom";
 import "./styles/global.scss";
 import Main from "./components/Main/Main";
 import Menu from "./components/Menu/Menu";
-import TowersMenu from "./components/Menu/NavigationMenu/TowersMenu/TowersMenu";
+import UnionMenu from "./components/Menu/NavigationMenu/UnionMenu/UnionMenu";
 
 interface IRoutes {
   [key: string]: () => HTMLElement;
@@ -13,7 +13,7 @@ interface IRoutes {
 const routes: IRoutes = {
   "/": Main,
   "/menu": Menu,
-  "/menu/towers": TowersMenu,
+  "/menu/towers": UnionMenu,
 };
 
 export const navigate = (path: string) => {

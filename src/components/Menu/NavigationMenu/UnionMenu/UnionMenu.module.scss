@@ -1,6 +1,6 @@
 @use "../../../../styles/variable.scss" as v;
 
-.tower_menu {
+.union_menu {
   width: 100%;
   min-height: 100vh;
   background-image: url("/bg/towersMenu.png");
@@ -18,4 +18,11 @@
   padding-top: 50px;
   padding-left: 50px;
   padding-right: 50px;
+}
+
+.dynamic_container {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin-top: 30px;
 }

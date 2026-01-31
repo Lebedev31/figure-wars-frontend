@@ -1,18 +1,15 @@
 // Определяем литеральный тип для имен файлов на основе твоего скриншота
-type SkillFileName =
+import type { Skill } from "../general.type";
+export type SkillFileName =
   | "oneRangDamage"
   | "oneRangHp"
   | "oneRangRange"
   | "twoRangSkillKrit"
   | "twoRangStan"
-  | "twoRangToch";
-
-interface Skill {
-  name: string;
-  description: string;
-  src: `/towers/union-skils/${SkillFileName}.png`;
-  effect: any; // Пока оставляем any, как ты и просил
-}
+  | "twoRangToch"
+  | "threeRang1.png"
+  | "threeRang2.png"
+  | "threeRang3.png";
 
 export const unionSkills: Skill[] = [
   {
@@ -51,4 +48,28 @@ export const unionSkills: Skill[] = [
     src: "/towers/union-skils/twoRangToch.png",
     effect: null,
   },
+
+  {
+    name: "1",
+    description: "2",
+    src: "/towers/union-skils/threeRang1.png",
+    effect: null,
+  },
+
+  {
+    name: "2",
+    description: "3",
+    src: "/towers/union-skils/threeRang2.png",
+    effect: null,
+  },
+
+  {
+    name: "1",
+    description: "2",
+    src: "/towers/union-skils/threeRang3.png",
+    effect: null,
+  },
 ];
+
+export const description =
+  "Общие улучшения башен, которые применяются ко всем без исключениям башням";

@@ -1,0 +1,26 @@
+@use "../../../../../styles/variable.scss" as v;
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+  margin: 55px; // Центрирование блока
+}
+
+.container {
+  width: 230px; // Ограничиваем, чтобы текст не растягивался слишком сильно
+  padding: 15px; // Внутренние отступы для текста
+  background: v.$bg-dark;
+  border: 1px solid v.$btn-secondary; // Такой же border как у иконок
+  border-radius: 4px;
+  height: 215px;
+}
+
+.text {
+  color: white;
+  font-size: 0.95rem;
+  line-height: 1.4;
+  margin: 0;
+  text-align: center;
+  word-wrap: break-word; // Чтобы длинные слова не ломали блок
+}

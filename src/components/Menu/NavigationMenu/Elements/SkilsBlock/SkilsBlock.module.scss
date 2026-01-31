@@ -1,0 +1,50 @@
+@use "../../../../../styles/variable.scss" as v;
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: fit-content;
+}
+
+.title {
+  margin: 0 0 20px 0;
+  font-size: 18px;
+  text-align: center;
+  color: #fff; // или твой цвет из переменных
+}
+
+.container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  padding: 10px;
+}
+
+.skillWrapper {
+  width: 64px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid v.$btn-secondary;
+  border-radius: 4px;
+  cursor: pointer; // Теперь курсор работает на всем квадрате
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease;
+  overflow: hidden; // Чтобы картинка не вылазила за рамки
+}
+
+.skillIcon {
+  width: 90%; // Чуть меньше обертки, чтобы был отступ от краев
+  height: 90%;
+  object-fit: contain;
+}
+
+.active {
+  filter: drop-shadow(0 0 12px rgba(255, 215, 0, 0.8))
+    drop-shadow(0 0 15px rgba(255, 165, 0, 0.4));
+  transform: scale(1.15); // Легкое увеличение
+  z-index: 10; // Чтобы свечение было поверх соседей
+}
