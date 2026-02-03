@@ -1,6 +1,6 @@
 import styles from "./Tabs.module.scss";
 import { h } from "../../../../../dom";
-import { getTowerName, onClickTabs } from "./Tabs.logic";
+import { getName, onClickTabs } from "./Tabs.logic";
 
 type TabsProps<Name extends string, Patch extends string> = {
   name: Name;
@@ -14,7 +14,7 @@ export default function Tabs<Name extends string, Patch extends string>(
     <div className={styles.tabs} onclick={(e) => onClickTabs(e)}>
       {tabsProps.map((item) => {
         return (
-          <div onclick={() => getTowerName(item.name)}>
+          <div onclick={() => getName(item.name)}>
             <img src={item.src} alt="картинка" />
           </div>
         );

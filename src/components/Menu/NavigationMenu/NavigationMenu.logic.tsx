@@ -5,6 +5,8 @@ import { unionSkills } from "../../../type/branchesTowers/union";
 import Description from "./Elements/Description/Description";
 import { description as unionDescription } from "../../../type/branchesTowers/union";
 
+export function NavigationController(name: string) {}
+
 function addBlockSlils(skills: Skill[], name: string, container: Element) {
   container.append(SkilsBlock(skills, name));
 }

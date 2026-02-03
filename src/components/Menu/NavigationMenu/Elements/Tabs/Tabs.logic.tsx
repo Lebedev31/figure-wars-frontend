@@ -17,7 +17,7 @@ export function onClickTabs(e: Event) {
     target.classList.add(styles.active);
   }
 }
-export function getTowerName(name: string) {
+export function getName(name: string) {
   const event = new CustomEvent(EVENT.MENU_TABS, { detail: name });
   messenger.dispatchEvent(event);
 }
